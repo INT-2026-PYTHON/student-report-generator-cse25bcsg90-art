@@ -19,3 +19,18 @@ RECORDS: list[dict] = [
     {"name": "Diana",   "subject": "Science", "score": 70},
     {"name": "Diana",   "subject": "English", "score": 65},
 ]
+
+def format_report(records):
+    report = {}
+    for rec in records:
+        name = rec["name"]
+        score = rec["score"]
+        if name not in report:
+            report[name] = {"total": 0, "count": 0}
+        report[name]["total"] += score
+        report[name]["count"] += 1
+    lines = []
+    for name, stats in report.items():
+        avg = stats["total"] / stats["count"]
+        lines.append(f"{name}: Average = {avg:.2f}")
+    return "\n".join(lines)
